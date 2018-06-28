@@ -10,6 +10,8 @@ tileh=32
 allw, allh = tilew*3, tileh*3
 
 function love.load()
+	love.window.setMode(480, 480)
+	love.window.setTitle("Tic-tac-toe!")
     local IMAGE_FILES = {
 	"splash", "cross",  "round",  "splash",  "red",  "yellow"
 	}
@@ -25,6 +27,7 @@ function love.load()
 end
 
 function love.draw()
+	lg.scale(5, 5)
 	fields = 
 	{
 		{1, 2, 1},
