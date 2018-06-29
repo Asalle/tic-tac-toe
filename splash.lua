@@ -13,5 +13,5 @@ function splash.draw(  )
 end
 
 function splash.mousepressed(  )
-	print("Moving on to the actual game")
+	play.enter()
 end
