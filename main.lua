@@ -58,6 +58,21 @@ function love.draw()
 	end
 end
 
+function add_object(lessx, lessy, rowi, coli)
+	if done_fields[rowi][coli] == 1 then
+		print("Clicking the old field")
+		return
+	end
+
+	local newObjId = #objects + 1
+	local item = (turn % 2 == 0) and img.cross or img.round -- my god, ternary operator!
+	objects[newObjId] = {x = lessx, y = lessy, item = item}
+	turn = turn + 1
+	done_fields[rowi][coli] = 1
+	print("id ", newObjId)
+	print(rowi, coli)
+end
+
 function love.mousepressed(x, y, button, istouch)
 	for rowi = 1, #borders-1 do
 		for coli = 1, #borders[rowi]-1 do
@@ -65,18 +80,13 @@ function love.mousepressed(x, y, button, istouch)
 			local lessx, lessy = less[1], less[2]
 			local morex, morey = more[1], more[2]
 			if lessx <= x and lessy <= y and morex > x and morey > y then
-				if less[1] > 0 then
-					less[1] = less[1]/5
+				if lessx > 0 then
+					lessx = lessx/5
 				end
-				if less[2] > 0 then
-					less[2] = less[2]/5
+				if lessy > 0 then
+					lessy = lessy/5
 				end
-				local newObjId = #objects + 1
-				local item = (turn % 2 == 0) and img.cross or img.round -- my god, ternary operator!
-				objects[newObjId] = {x = less[1], y = less[2], item = item}
-				print(rowi, coli)
-				turn = turn + 1
-				print("turn ", turn)
+				add_object(lessx, lessy, rowi, coli)
 				return
 			end
 		end
