@@ -65,6 +65,10 @@ function play.mousepressed(x, y)
 	end
 end
 
+function play.keypressed(  )
+
+end
+
 function add_object(lessx, lessy, rowi, coli)
 	if done_fields[rowi][coli] ~= 0 then
 		print("Clicking the old field")
@@ -81,17 +85,33 @@ function add_object(lessx, lessy, rowi, coli)
 end
 
 function check_win()
+	local winnum = 0
+	local winner = 0
 	for i=1,3 do
 		if done_fields[i][1] ~= 0 and done_fields[i][1] == done_fields[i][2] and done_fields[i][2] == done_fields[i][3] then
-			return done_fields[i][1]
+			winner = done_fields[i][1]
 		elseif done_fields[1][i] ~= 0 and done_fields[1][i] == done_fields[2][i] and done_fields[2][i] == done_fields[3][i] then
-			return done_fields[1][i]
+			winner = done_fields[1][i]
 		end
 	end
 	if done_fields[1][1] ~= 0 and done_fields[1][1] == done_fields[2][2] and done_fields[2][2] == done_fields[3][3] then
-		return done_fields[1][1]
+		winner = done_fields[1][1]
 	elseif done_fields[1][3] ~= 0 and done_fields[1][3] == done_fields[2][2] and done_fields[2][2] == done_fields[3][1] then
-		return done_fields[1][3]
+		winnum = winnum + 1
 	end
-	return 0
+
+	truce = true
+	for i=1,3 do
+		for j=1,3 do
+			if done_fields[i][j] == 0 then
+				truce = false
+			end
+		end
+	end
+
+	if truce then
+		winner = 3
+	end
+
+	return winner
 end

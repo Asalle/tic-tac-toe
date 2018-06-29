@@ -2,7 +2,13 @@ win = {}
 
 function win.enter(winner)
 	STATE = STATE_WIN
-	winner_name = (winner == 2) and 'crosses' or 'rounds'
+	if winner == 1 then
+		winner_name = 'rounds'
+	elseif winner == 2 then
+		winner_name = 'crosses'
+	else
+		winner_name = 'friendship'
+	end
 end
 
 function win.draw(  )
