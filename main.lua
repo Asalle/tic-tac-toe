@@ -1,6 +1,11 @@
 -- made by Asalle
 
+require("win")
+
 lg = love.graphics
+
+STATE_SPLASH, STATE_INGAME, STATE_WIN = 1, 2, 3
+gamestates = {[0]=splash, [1]=ingame, [2]=win}
 
 img = {}
 
@@ -14,7 +19,7 @@ done_fields =
 	{0, 0, 0},
 	{0, 0, 0},
 }
-turn = 0 -- round
+turn = 0 -- cross
 fields =
 {
 	{1, 2, 1},
@@ -59,7 +64,7 @@ function love.draw()
 end
 
 function add_object(lessx, lessy, rowi, coli)
-	if done_fields[rowi][coli] == 1 then
+	if done_fields[rowi][coli] ~= 0 then
 		print("Clicking the old field")
 		return
 	end
@@ -68,9 +73,25 @@ function add_object(lessx, lessy, rowi, coli)
 	local item = (turn % 2 == 0) and img.cross or img.round -- my god, ternary operator!
 	objects[newObjId] = {x = lessx, y = lessy, item = item}
 	turn = turn + 1
-	done_fields[rowi][coli] = 1
+	done_fields[rowi][coli] = turn % 2 + 1 -- 1 is cross, 2 is round
 	print("id ", newObjId)
 	print(rowi, coli)
+end
+
+function check_win()
+	for i=1,3 do
+		if done_fields[i][1] ~= 0 and done_fields[i][1] == done_fields[i][2] and done_fields[i][2] == done_fields[i][3] then
+			return done_fields[i][1]
+		elseif done_fields[1][i] ~= 0 and done_fields[1][i] == done_fields[2][i] and done_fields[2][i] == done_fields[3][i] then
+			return done_fields[1][i]
+		end
+	end
+	if done_fields[1][1] ~= 0 and done_fields[1][1] == done_fields[2][2] and done_fields[2][2] == done_fields[3][3] then
+		return done_fields[1][1]
+	elseif done_fields[1][3] ~= 0 and done_fields[1][3] == done_fields[2][2] and done_fields[2][2] == done_fields[3][1] then
+		return done_fields[1][3]
+	end
+	return 0
 end
 
 function love.mousepressed(x, y, button, istouch)
@@ -87,7 +108,10 @@ function love.mousepressed(x, y, button, istouch)
 					lessy = lessy/5
 				end
 				add_object(lessx, lessy, rowi, coli)
-				return
+				local winner = check_win()
+				if winner ~= 0 then
+					win.enter(winner)
+				end
 			end
 		end
 	end
