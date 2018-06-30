@@ -60,6 +60,9 @@ function play.mousepressed(x, y)
 end
 
 function play.keypressed(key, scancode, isrepeat)
+	if key == "f" then
+		name_choice.enter()
+	end
 end
 
 function add_object(lessx, lessy, rowi, coli)
