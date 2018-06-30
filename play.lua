@@ -88,7 +88,7 @@ function check_win()
 	if done_fields[1][1] ~= 0 and done_fields[1][1] == done_fields[2][2] and done_fields[2][2] == done_fields[3][3] then
 		winner = done_fields[1][1]
 	elseif done_fields[1][3] ~= 0 and done_fields[1][3] == done_fields[2][2] and done_fields[2][2] == done_fields[3][1] then
-		winnum = winnum + 1
+		winner = done_fields[1][3]
 	end
 
 	truce = true
