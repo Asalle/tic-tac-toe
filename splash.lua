@@ -16,6 +16,6 @@ function splash.mousepressed(  )
 	play.enter()
 end
 
-function play.keypressed(  )
+function splash.keypressed()
 	play.enter()
 end

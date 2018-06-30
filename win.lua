@@ -16,6 +16,10 @@ function win.draw(  )
 	love.graphics.print(winner_name..' won')
 end
 
-function win.keypressed(  )
+function win.keypressed(key, scancode, isrepeat)
+	love.event.quit()
+end
+
+function win.mousepressed(x, y, button, istouch)
 	love.event.quit()
 end

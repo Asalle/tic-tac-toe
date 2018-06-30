@@ -7,7 +7,6 @@ require("splash")
 lg = love.graphics
 
 STATE_SPLASH, STATE_PLAY, STATE_WIN = 0, 1, 2
-STATE = STATE_SPLASH
 gamestates = {[0]=splash, [1]=play, [2]=win}
 
 IMAGE_FILES = {
@@ -36,6 +35,6 @@ function love.mousepressed(x, y, button, istouch)
 	gamestates[STATE].mousepressed(x, y)
 end
 
-function love.keypressed(  )
+function love.keypressed(key, scancode, isrepeat)
 	gamestates[STATE].keypressed()
 end

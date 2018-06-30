@@ -65,8 +65,7 @@ function play.mousepressed(x, y)
 	end
 end
 
-function play.keypressed(  )
-
+function play.keypressed(key, scancode, isrepeat)
 end
 
 function add_object(lessx, lessy, rowi, coli)
