@@ -3,17 +3,20 @@
 require("win")
 require("play")
 require("splash")
+local lovetest = require "test/lovetest"
 
-lg = love.graphics
+function init_game()
+	lg = love.graphics
 
-STATE_SPLASH, STATE_PLAY, STATE_WIN = 0, 1, 2
-gamestates = {[0]=splash, [1]=play, [2]=win}
+	STATE_SPLASH, STATE_PLAY, STATE_WIN = 0, 1, 2
+	gamestates = {[0]=splash, [1]=play, [2]=win}
 
-IMAGE_FILES = {
-"splash", "cross",  "round", "red",  "yellow"
-}
+	IMAGE_FILES = {
+	"splash", "cross",  "round", "red",  "yellow"
+	}
 
-img = {}
+	img = {}
+end
 
 function print_color(text, x, y)
 	local scaleFactor = 1
@@ -21,7 +24,13 @@ function print_color(text, x, y)
 	love.graphics.print(text, x, y, 0, scaleFactor, scaleFactor)
 end
 
-function love.load()
+function love.load(arg)
+	assert(arg)
+	if lovetest.detect(arg) then
+		lovetest.run()
+	end
+
+	init_game()
 	love.window.setMode(480, 480)
 	love.window.setTitle("Tic-tac-toe!")
 	for i,v in ipairs(IMAGE_FILES) do

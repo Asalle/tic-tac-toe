@@ -4,6 +4,11 @@ WIN_MSG = {"play again?", "yes", "no"}
 selection = 1 -- yes
 
 function wrap(value, min, max)
+	if min > max then
+		temp = min
+		min = max
+		max = temp
+	end
 	if value < min then
 		return min
 	elseif value > max then

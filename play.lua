@@ -73,8 +73,6 @@ function add_object(lessx, lessy, rowi, coli)
 	objects[newObjId] = {x = lessx, y = lessy, item = item}
 	turn = turn + 1
 	done_fields[rowi][coli] = turn % 2 + 1 -- 1 is cross, 2 is round
-	print("id ", newObjId)
-	print(rowi, coli)
 end
 
 function check_win()
