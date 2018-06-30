@@ -1,21 +1,13 @@
 play = {}
 
-objects = {}
-done_fields =
-{
-	{0, 0, 0},
-	{0, 0, 0},
-	{0, 0, 0},
-}
-turn = 0 -- cross
 fields =
 {
 	{1, 2, 1},
 	{2, 1, 2},
 	{1, 2, 1},
 }
-tileh=32
-local height = 5*tileh
+tileh=160
+local height = tileh
 borders =
 {
 	{{0,0},          {height,0},		 {height*2, 0},        {height*3, 0}},
@@ -25,15 +17,23 @@ borders =
 }
 
 function play.enter(  )
+	love.graphics.setColor({1, 1, 1, 1}) -- reset after splash
+	done_fields =
+	{
+		{0, 0, 0},
+		{0, 0, 0},
+		{0, 0, 0},
+	}
+	objects = {}
+	turn = 0 -- cross
 	STATE = STATE_PLAY
 end
 
 function play.draw(  )
-	lg.scale(5, 5)
 	for rowi=1, #fields do
 		for coli=1, #fields[rowi] do
 			local number = fields[rowi][coli]
-			lg.draw(tiles[number], (coli-1)*tileh, (rowi-1)*tileh)
+			lg.draw(tiles[number], (rowi-1)*tileh, (coli-1)*tileh)
 		end
 	end
 
@@ -49,12 +49,6 @@ function play.mousepressed(x, y)
 			local lessx, lessy = less[1], less[2]
 			local morex, morey = more[1], more[2]
 			if lessx <= x and lessy <= y and morex > x and morey > y then
-				if lessx > 0 then
-					lessx = lessx/5
-				end
-				if lessy > 0 then
-					lessy = lessy/5
-				end
 				add_object(lessx, lessy, rowi, coli)
 				local winner = check_win()
 				if winner ~= 0 then

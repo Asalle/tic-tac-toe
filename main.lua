@@ -10,11 +10,16 @@ STATE_SPLASH, STATE_PLAY, STATE_WIN = 0, 1, 2
 gamestates = {[0]=splash, [1]=play, [2]=win}
 
 IMAGE_FILES = {
-"splash", "cross",  "round",  "splash",  "red",  "yellow"
+"splash", "cross",  "round", "red",  "yellow"
 }
 
 img = {}
-tileh = 32
+
+function print_color(text, x, y)
+	local scaleFactor = 1
+	love.graphics.setColor(font_color)
+	love.graphics.print(text, x, y, 0, scaleFactor, scaleFactor)
+end
 
 function love.load()
 	love.window.setMode(480, 480)
@@ -22,6 +27,11 @@ function love.load()
 	for i,v in ipairs(IMAGE_FILES) do
 			img[v] = lg.newImage("data/"..v..".png")
 	end
+
+	fontSize = 50
+	font = love.graphics.newFont("data/heav.ttf", fontSize)
+	love.graphics.setFont(font)
+	font_color = {1, 0.5, 0.55, 1}
 
 	tiles = {img.red, img.yellow}
 	splash.enter()
@@ -36,5 +46,5 @@ function love.mousepressed(x, y, button, istouch)
 end
 
 function love.keypressed(key, scancode, isrepeat)
-	gamestates[STATE].keypressed()
+	gamestates[STATE].keypressed(key, scancode, isrepeat)
 end

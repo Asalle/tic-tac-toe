@@ -2,14 +2,16 @@ splash = {}
 
 lg = love.graphics
 
+motto = {"say hello", "to the", "tic tac", "toe"}
+
 function splash.enter(  )
 	STATE = STATE_SPLASH
 end
 
 function splash.draw(  )
-	-- love.window.setMode(480, 480)
-	splash_img = img.splash
-	lg.draw(splash_img, 0, 0)
+	for i, word in ipairs(motto) do
+		print_color(word, fontSize, fontSize*i)
+	end
 end
 
 function splash.mousepressed(  )
