@@ -3,13 +3,14 @@
 require("win")
 require("play")
 require("splash")
+require("name_choice")
 local lovetest = require "test/lovetest"
 
 function init_game()
 	lg = love.graphics
 
-	STATE_SPLASH, STATE_PLAY, STATE_WIN = 0, 1, 2
-	gamestates = {[0]=splash, [1]=play, [2]=win}
+	STATE_SPLASH, STATE_PLAY, STATE_WIN, STATE_NAMECHOICE, STATE_HELLO = 0, 1, 2, 3, 4
+	gamestates = {[0]=splash, [1]=play, [2]=win, [3]=name_choice, [4]=hello}
 
 	IMAGE_FILES = {
 	"splash", "cross",  "round", "red",  "yellow"
@@ -38,7 +39,7 @@ function love.load(arg)
 	end
 
 	fontSize = 50
-	font = love.graphics.newFont("data/heav.ttf", fontSize)
+	font = love.graphics.newFont("data/HeavyDataWithCN.ttf", fontSize)
 	love.graphics.setFont(font)
 	font_color = {1, 0.5, 0.55, 1}
 

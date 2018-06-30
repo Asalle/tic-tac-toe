@@ -1,6 +1,6 @@
 win = {}
 
-WIN_MSG = {"play again?", "yes", "no"}
+WIN_MSG = {"continue?", "yes", "no"}
 selection = 1 -- yes
 
 function wrap(value, min, max)
@@ -45,7 +45,7 @@ function win.keypressed(key, scancode, isrepeat)
 	elseif key == "return" then
 		print("selection", selection)
 		if selection == 1 then
-			play.enter()
+			name_choice.enter()
 		else
 			love.event.quit()
 		end

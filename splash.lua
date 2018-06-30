@@ -2,7 +2,7 @@ splash = {}
 
 lg = love.graphics
 
-motto = {"say hello", "to the", "tic tac", "toe"}
+motto = {"say hello", "to the", "tic tac", "toe!", "", "Press any", "button"}
 
 function splash.enter(  )
 	STATE = STATE_SPLASH
