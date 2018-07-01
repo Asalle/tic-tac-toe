@@ -24,3 +24,17 @@ function test_wrap()
 	assert_true(wrap(value, 11, 5) == value)
 	assert_true(wrap(value, 100, 500) == 100)
 end
+
+function test_play()
+	play.enter()
+	assert_true(done_fields)
+	for i = 1, #done_fields do
+		for j=1, #done_fields[i] do
+			assert_true(done_fields[i][j] == 0)
+		end
+	end
+	assert_true(next(objects) == nil)
+	assert_true(turn == 0)
+	assert_true(STATE == STATE_PLAY)
+end
+
